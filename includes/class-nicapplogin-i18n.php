@@ -9,8 +9,8 @@
  * @link       https://efraim.cat
  * @since      1.0.0
  *
- * @package    Nic_App_Login
- * @subpackage Nic_App_Login/includes
+ * @package    Nicapplogin
+ * @subpackage Nicapplogin/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Nic_App_Login
- * @subpackage Nic_App_Login/includes
+ * @package    Nicapplogin
+ * @subpackage Nicapplogin/includes
  * @author     Efraim Bayarri <efraim@efraim.cat>
  */
-class Nic_App_Login_i18n {
+class Nicapplogin_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Nic_App_Login_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'nic-app-login',
+			'nicapplogin',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

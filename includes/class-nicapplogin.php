@@ -9,8 +9,8 @@
  * @link       https://efraim.cat
  * @since      1.0.0
  *
- * @package    Nic_App_Login
- * @subpackage Nic_App_Login/includes
+ * @package    Nicapplogin
+ * @subpackage Nicapplogin/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Nic_App_Login
- * @subpackage Nic_App_Login/includes
+ * @package    Nicapplogin
+ * @subpackage Nicapplogin/includes
  * @author     Efraim Bayarri <efraim@efraim.cat>
  */
-class Nic_App_Login {
+class Nicapplogin {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Nic_App_Login {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Nic_App_Login_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Nicapplogin_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -67,12 +67,12 @@ class Nic_App_Login {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'NIC_APP_LOGIN_VERSION' ) ) {
-			$this->version = NIC_APP_LOGIN_VERSION;
+		if ( defined( 'NICAPPLOGIN_VERSION' ) ) {
+			$this->version = NICAPPLOGIN_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'nic-app-login';
+		$this->plugin_name = 'nicapplogin';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -86,10 +86,10 @@ class Nic_App_Login {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Nic_App_Login_Loader. Orchestrates the hooks of the plugin.
-	 * - Nic_App_Login_i18n. Defines internationalization functionality.
-	 * - Nic_App_Login_Admin. Defines all hooks for the admin area.
-	 * - Nic_App_Login_Public. Defines all hooks for the public side of the site.
+	 * - Nicapplogin_Loader. Orchestrates the hooks of the plugin.
+	 * - Nicapplogin_i18n. Defines internationalization functionality.
+	 * - Nicapplogin_Admin. Defines all hooks for the admin area.
+	 * - Nicapplogin_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -103,33 +103,33 @@ class Nic_App_Login {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-nic-app-login-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-nicapplogin-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-nic-app-login-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-nicapplogin-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-nic-app-login-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-nicapplogin-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-nic-app-login-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-nicapplogin-public.php';
 
-		$this->loader = new Nic_App_Login_Loader();
+		$this->loader = new Nicapplogin_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Nic_App_Login_i18n class in order to set the domain and to register the hook
+	 * Uses the Nicapplogin_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -137,7 +137,7 @@ class Nic_App_Login {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Nic_App_Login_i18n();
+		$plugin_i18n = new Nicapplogin_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -152,7 +152,7 @@ class Nic_App_Login {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Nic_App_Login_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Nicapplogin_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -168,7 +168,7 @@ class Nic_App_Login {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Nic_App_Login_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Nicapplogin_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -199,7 +199,7 @@ class Nic_App_Login {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Nic_App_Login_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Nicapplogin_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

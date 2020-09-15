@@ -6,8 +6,8 @@
  * @link       https://efraim.cat
  * @since      1.0.0
  *
- * @package    Nic_App_Login
- * @subpackage Nic_App_Login/includes
+ * @package    Nicapplogin
+ * @subpackage Nicapplogin/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Nic_App_Login
- * @subpackage Nic_App_Login/includes
+ * @package    Nicapplogin
+ * @subpackage Nicapplogin/includes
  * @author     Efraim Bayarri <efraim@efraim.cat>
  */
-class Nic_App_Login_Deactivator {
+class Nicapplogin_Deactivator {
 
 	/**
 	 * Short Description. (use period)

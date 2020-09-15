@@ -22,7 +22,7 @@
  * @link       https://efraim.cat
  * @since      1.0.0
  *
- * @package    Nic_App_Login
+ * @package    Nicapplogin
  */
 
 // If uninstall not called from WordPress, then exit.

@@ -10,7 +10,7 @@
  *
  * @link              https://efraim.cat
  * @since             1.0.0
- * @package           Nic_App_Login
+ * @package           Nicapplogin
  *
  * @wordpress-plugin
  * Plugin Name:       nic-app login
@@ -21,7 +21,7 @@
  * Author URI:        https://efraim.cat
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       nic-app-login
+ * Text Domain:       nicapplogin
  * Domain Path:       /languages
  */
 
@@ -35,34 +35,34 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'NIC_APP_LOGIN_VERSION', '1.0.0' );
+define( 'NICAPPLOGIN_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-nic-app-login-activator.php
+ * This action is documented in includes/class-nicapplogin-activator.php
  */
-function activate_nic_app_login() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nic-app-login-activator.php';
-	Nic_App_Login_Activator::activate();
+function activate_nicapplogin() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nicapplogin-activator.php';
+	Nicapplogin_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-nic-app-login-deactivator.php
+ * This action is documented in includes/class-nicapplogin-deactivator.php
  */
-function deactivate_nic_app_login() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nic-app-login-deactivator.php';
-	Nic_App_Login_Deactivator::deactivate();
+function deactivate_nicapplogin() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nicapplogin-deactivator.php';
+	Nicapplogin_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_nic_app_login' );
-register_deactivation_hook( __FILE__, 'deactivate_nic_app_login' );
+register_activation_hook( __FILE__, 'activate_nicapplogin' );
+register_deactivation_hook( __FILE__, 'deactivate_nicapplogin' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-nic-app-login.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-nicapplogin.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +73,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-nic-app-login.php';
  *
  * @since    1.0.0
  */
-function run_nic_app_login() {
+function run_nicapplogin() {
 
-	$plugin = new Nic_App_Login();
+	$plugin = new Nicapplogin();
 	$plugin->run();
 
 }
-run_nic_app_login();
+run_nicapplogin();

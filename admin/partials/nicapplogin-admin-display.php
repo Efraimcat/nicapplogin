@@ -8,8 +8,8 @@
  * @link       https://efraim.cat
  * @since      1.0.0
  *
- * @package    Nic_App_Login
- * @subpackage Nic_App_Login/admin/partials
+ * @package    Nicapplogin
+ * @subpackage Nicapplogin/admin/partials
  */
 ?>
 
