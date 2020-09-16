@@ -1,12 +1,6 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
  *
  * @link              https://efraim.cat
  * @since             1.0.0
@@ -36,6 +30,14 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'NICAPPLOGIN_VERSION', '1.0.0' );
+
+/**
+ * Currently only php 7.1 and higher is supported
+ */
+if (version_compare(phpversion(), '7.1.0', '<')) {
+    // php version isn't high enough
+    die();
+}
 
 /**
  * The code that runs during plugin activation.
