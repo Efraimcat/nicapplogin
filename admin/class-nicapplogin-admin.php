@@ -48,10 +48,12 @@ class Nicapplogin_Admin {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
+		add_action('admin_menu', array(
+		    $this,
+		    'addPluginAdminMenu'
+		), 9);
 	}
 
 	/**
@@ -60,21 +62,7 @@ class Nicapplogin_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Nicapplogin_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Nicapplogin_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/nicapplogin-admin.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -83,21 +71,129 @@ class Nicapplogin_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Nicapplogin_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Nicapplogin_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/nicapplogin-admin.js', array( 'jquery' ), $this->version, false );
-
 	}
 
+	/**
+	 * Admin menu.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param
+	 *            void
+	 *
+	 */
+	public function addPluginAdminMenu() {
+	    // add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
+	    add_menu_page('Nic-app Login', 'Nic-app Login', 'administrator', $this->plugin_name, array(
+	        $this,
+	        'displayPluginAdminDashboard'
+	    ), plugin_dir_url(dirname(__FILE__)) . 'admin/img/nic-app-logo.png', 26);
+	    add_submenu_page($this->plugin_name, __('Nic-app Login Settings', $this->plugin_name), __('Settings', $this->plugin_name), 'administrator', $this->plugin_name . '-settings', array(
+	        $this,
+	        'displayPluginAdminSettings'
+	    ));
+	}
+	
+	/**
+	 * Admin Dashboard.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param
+	 *            void
+	 *
+	 */
+	public function displayPluginAdminDashboard() {
+	    if (isset($_GET['error_message'])) {
+	        add_action('admin_notices', array(
+	            $this,
+	            'pluginNameSettingsMessages'
+	        ));
+	        do_action('admin_notices', sanitize_text_field($_GET['error_message']));
+	    }
+	    require_once 'partials/' . $this->plugin_name . '-admin-display.php';
+	}
+	
+	/**
+	 * Display Admin settings.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param
+	 *            void
+	 *
+	 */
+	public function displayPluginAdminSettings() {
+	    if (isset($_GET['error_message'])) {
+	        add_action('admin_notices', array(
+	            $this,
+	            'pluginNameSettingsMessages'
+	        ));
+	        do_action('admin_notices', sanitize_text_field($_GET['error_message']));
+	    }
+	    require_once 'partials/' . $this->plugin_name . '-admin-settings-display.php';
+	}
+	
+	/**
+	 * Admin Dashboard initial.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param
+	 *            void
+	 *
+	 */
+	public function displayPluginAdminSettingsInitial() {
+	    if (isset($_GET['error_message'])) {
+	        add_action('admin_notices', array(
+	            $this,
+	            'pluginNameSettingsMessages'
+	        ));
+	        do_action('admin_notices', sanitize_text_field($_GET['error_message']));
+	    }
+	    esc_html_e( "Options", $this->plugin_name );
+	}
+	
+	/**
+	 * Admin Dashboard initial.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param
+	 *            void
+	 *
+	 */
+	public function displayPluginAdminSettingsOther() {
+	    if (isset($_GET['error_message'])) {
+	        add_action('admin_notices', array(
+	            $this,
+	            'pluginNameSettingsMessages'
+	        ));
+	        do_action('admin_notices', sanitize_text_field($_GET['error_message']));
+	    }
+	    esc_html_e( "Other", $this->plugin_name );
+	}
+	
+	/**
+	 * Display Admin settings error messages.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param
+	 *            $error_message
+	 *
+	 */
+	public function pluginNameSettingsMessages($error_message) {
+	    switch ($error_message) {
+	        case '1':
+	            $message = __('There was an error adding this setting. Please try again.  If this persists, shoot us an email.', $this->plugin_name);
+	            $err_code = esc_attr('nicappcrono_setting');
+	            $setting_field = 'nicappcrono_setting';
+	            break;
+	    }
+	    $type = 'error';
+	    add_settings_error($setting_field, $err_code, $message, $type);
+	}
+	
 }
